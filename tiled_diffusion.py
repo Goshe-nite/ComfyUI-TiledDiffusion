@@ -472,6 +472,9 @@ class MultiDiffusion(AbstractDiffusion):
         c_in: dict = args["c"]
         cond_or_uncond: List = args["cond_or_uncond"]
 
+        # Bandaid fix for tensor on different devices error
+        devices.device = x_in.device
+
         N, C, H, W = x_in.shape
 
         # comfyui can feed in a latent that's a different size cause of SetArea, so we'll refresh in that case.
@@ -578,6 +581,9 @@ class SpotDiffusion(AbstractDiffusion):
         t_in: Tensor = args["timestep"]
         c_in: dict = args["c"]
         cond_or_uncond: List = args["cond_or_uncond"]
+
+        # Bandaid fix for tensor on different devices error
+        devices.device = x_in.device
 
         N, C, H, W = x_in.shape
 
@@ -739,6 +745,9 @@ class MixtureOfDiffusers(AbstractDiffusion):
         t_in: Tensor = args["timestep"]
         c_in: dict = args["c"]
         cond_or_uncond: List= args["cond_or_uncond"]
+
+        # Bandaid fix for tensor on different devices error
+        devices.device = x_in.device
 
         N, C, H, W = x_in.shape
 
